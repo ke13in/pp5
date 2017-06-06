@@ -1,5 +1,5 @@
 #include "teddy.h"
-//#include "stdafx.h"
+#include "stdafx.h"
 
 teddy::teddy(HINSTANCE hInst) : myDirectX(hInst)
 {
@@ -7,8 +7,8 @@ teddy::teddy(HINSTANCE hInst) : myDirectX(hInst)
 
 teddy::~teddy()
 {
-	xWire->Release();
-	xFill->Release();
+	//xWire->Release();
+	//xFill->Release();
 	
 
 }
@@ -67,9 +67,9 @@ void teddy::render(float r)
 	deviceContext->VSSetShader(teddyMesh.vertexShader, nullptr, 0);
 	deviceContext->VSSetConstantBuffers(0, 1, &teddyMesh.constantBuffer);
 	deviceContext->PSSetShader(teddyMesh.pixelShader, nullptr, 0);
-	deviceContext->RSSetState(xWire);
+	//deviceContext->RSSetState(xWire);
 	deviceContext->Draw(teddyMesh.vertCount, 0);
-	deviceContext->RSSetState(xFill);
+	//deviceContext->RSSetState(xFill);
 
 
 
@@ -164,7 +164,7 @@ void teddy::updateCam(float dt)
 
 void teddy::createResources(void)
 {
-	D3D11_RASTERIZER_DESC rastDesc;
+	/*D3D11_RASTERIZER_DESC rastDesc;
 	ZeroMemory(&rastDesc, sizeof(D3D11_RASTERIZER_DESC));
 	rastDesc.FillMode = D3D11_FILL_WIREFRAME;
 	rastDesc.CullMode = D3D11_CULL_NONE;
@@ -178,7 +178,7 @@ void teddy::createResources(void)
 	rastDesc.CullMode = D3D11_CULL_NONE;
 	rastDesc.DepthClipEnable = true;
 
-	device->CreateRasterizerState(&rastDesc2, &xFill);
+	device->CreateRasterizerState(&rastDesc2, &xFill);*/
 
 	device->CreatePixelShader(pixelShader, sizeof(pixelShader), NULL, &teddyMesh.pixelShader);
 	device->CreateVertexShader(vertexShader, sizeof(vertexShader), NULL, &teddyMesh.vertexShader);
@@ -213,8 +213,6 @@ void teddy::createResources(void)
 		meshVerts.push_back(tmp);
 		
 	}
-
-
 
 
 	teddyMesh.vertCount = meshVerts.size();

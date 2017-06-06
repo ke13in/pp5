@@ -1,33 +1,6 @@
 ﻿  teddy.cpp
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\teddy.cpp(235): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
-  myDirectX.cpp
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(6): error C2143: syntax error: missing ';' before '*'
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(6): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(12): error C2227: left of '->msgProc' must point to class/struct/union/generic type
-  e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(12): note: type is 'int *'
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(17): error C2825: '`anonymous-namespace'::myDirectX': must be a class or namespace when followed by '::'
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(17): error C2510: 'myDirectX': left of '::' must be a class/struct/union
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(18): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(19): error C2065: 'hAppInst': undeclared identifier
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(20): error C2065: 'hAppwnd': undeclared identifier
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(21): error C2065: 'clientH': undeclared identifier
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(22): error C2065: 'clientW': undeclared identifier
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(23): error C2065: 'appTitle': undeclared identifier
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(24): error C2065: 'wndwStyle': undeclared identifier
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(25): error C2355: 'this': can only be referenced inside non-static member functions or non-static data member initializers
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(27): error C2065: 'device': undeclared identifier
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(28): error C2065: 'deviceContext': undeclared identifier
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(29): error C2065: 'renderTarget': undeclared identifier
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(30): error C2065: 'swapChain': undeclared identifier
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(32): warning C4508: 'myDirectX': function should return a value; 'void' return type assumed
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(34): warning C4091: '': ignored on left of 'int' when no variable is declared
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(34): error C2143: syntax error: missing ';' before '::'
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(34): error C2059: syntax error: '::'
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(35): error C2143: syntax error: missing ';' before '{'
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(35): error C2447: '{': missing function header (old-style formal list?)
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(45): error C2825: '`anonymous-namespace'::myDirectX': must be a class or namespace when followed by '::'
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(45): error C2510: 'myDirectX': left of '::' must be a class/struct/union
-e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\win32project1\mydirectx.cpp(45): fatal error C1903: unable to recover from previous error(s); stopping compilation
-  INTERNAL COMPILER ERROR in 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe'
-      Please choose the Technical Support command on the Visual C++
-      Help menu, or open the Technical Support help file for more information
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\win32project1\teddy.cpp(29): warning C4244: 'initializing': conversion from 'UINT' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\win32project1\teddy.cpp(136): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\win32project1\teddy.cpp(137): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+  Win32Project1.vcxproj -> E:\Users\Kebin\Desktop\PP5\Project\pp5\Win32Project1\Debug\Win32Project1.exe
+  Win32Project1.vcxproj -> E:\Users\Kebin\Desktop\PP5\Project\pp5\Win32Project1\Debug\Win32Project1.pdb (Full PDB)

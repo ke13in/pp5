@@ -19,3 +19,6 @@
 
 
 // TODO: reference additional headers your program requires here
+#include "myDirectX.h"
+#include "teddy.h"
+#include "Win32Project1.h"

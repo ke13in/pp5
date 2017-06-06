@@ -1,7 +1,7 @@
 // Win32Project1.cpp : Defines the entry point for the application.
 //
 
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "Win32Project1.h"
 #include <Windows.h>
 #include "teddy.h"
@@ -42,7 +42,7 @@ int WINAPI WinMain(__in HINSTANCE hInstance, __in_opt HINSTANCE hPrevInstance, _
 //// Forward declarations of functions included in this code module:
 //ATOM                MyRegisterClass(HINSTANCE hInstance);
 //BOOL                InitInstance(HINSTANCE, int);
-//LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 //INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 //
 //int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
