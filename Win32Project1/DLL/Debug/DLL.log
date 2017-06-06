@@ -1,0 +1,20 @@
+﻿  stdafx.cpp
+e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\dll\dll.h(117): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\dll\dll.h(131): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\dll\dll.h(132): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\dll\dll.h(133): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\dll\dll.h(134): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\dll\dll.h(149): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\dll\dll.h(153): warning C4018: '<': signed/unsigned mismatch
+  DLL.cpp
+  dllmain.cpp
+e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\dll\dll.h(117): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\dll\dll.h(131): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\dll\dll.h(132): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\dll\dll.h(133): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\dll\dll.h(134): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\dll\dll.h(149): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\documents\visual studio 2015\projects\may17\win32project1\dll\dll.h(153): warning C4018: '<': signed/unsigned mismatch
+     Creating library E:\Users\Kebin\Documents\Visual Studio 2015\Projects\May17\Win32Project1\Debug\DLL.lib and object E:\Users\Kebin\Documents\Visual Studio 2015\Projects\May17\Win32Project1\Debug\DLL.exp
+  DLL.vcxproj -> E:\Users\Kebin\Documents\Visual Studio 2015\Projects\May17\Win32Project1\Debug\DLL.dll
+  DLL.vcxproj -> E:\Users\Kebin\Documents\Visual Studio 2015\Projects\May17\Win32Project1\Debug\DLL.pdb (Full PDB)
