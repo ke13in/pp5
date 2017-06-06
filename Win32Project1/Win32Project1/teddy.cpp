@@ -7,8 +7,8 @@ teddy::teddy(HINSTANCE hInst) : myDirectX(hInst)
 
 teddy::~teddy()
 {
-	//xWire->Release();
-	//xFill->Release();
+	xWire->Release();
+	xFill->Release();
 	
 
 }
@@ -41,6 +41,7 @@ bool teddy::init()
 	static const XMVECTORF32 at = { 0.0f, -0.1f, 0.0f, 0.0f };
 	static const XMVECTORF32 up = { 0.0f, 1.0f, 0.0f, 0.0f };
 
+	DirectX::XMStoreFloat4x4(&xCamera, XMMatrixInverse(nullptr, XMMatrixLookAtLH(eye, at, up)));
 	DirectX::XMStoreFloat4x4(&teddyMesh.constBuffData.view, XMMatrixTranspose(XMMatrixInverse(nullptr, XMLoadFloat4x4(&xCamera))));
 
 	createResources();
@@ -52,13 +53,14 @@ bool teddy::init()
 void teddy::update(float u)
 {
 	updateCam(u);
+	DirectX::XMStoreFloat4x4(&teddyMesh.constBuffData.view, XMMatrixTranspose(XMMatrixInverse(nullptr, XMLoadFloat4x4(&xCamera))));
 }
 
 void teddy::render(float r)
 {
 	deviceContext->ClearRenderTargetView(renderTarget, DirectX::Colors::SeaGreen);
 
-	deviceContext->UpdateSubresource(teddyMesh.constantBuffer, 0, NULL, &teddyMesh.constantBuffer, 0, 0);
+	deviceContext->UpdateSubresource(teddyMesh.constantBuffer, 0, NULL, &teddyMesh.constBuffData, 0, 0);
 	UINT Stride = sizeof(ShaderStruct::VertPosColor);
 	UINT Offset = 0;
 	deviceContext->IASetVertexBuffers(0, 1, &teddyMesh.vertexBuffer, &Stride, &Offset);
@@ -67,9 +69,9 @@ void teddy::render(float r)
 	deviceContext->VSSetShader(teddyMesh.vertexShader, nullptr, 0);
 	deviceContext->VSSetConstantBuffers(0, 1, &teddyMesh.constantBuffer);
 	deviceContext->PSSetShader(teddyMesh.pixelShader, nullptr, 0);
-	//deviceContext->RSSetState(xWire);
+	deviceContext->RSSetState(xWire);
 	deviceContext->Draw(teddyMesh.vertCount, 0);
-	//deviceContext->RSSetState(xFill);
+	deviceContext->RSSetState(xFill);
 
 
 
@@ -89,28 +91,28 @@ void teddy::updateCam(float dt)
 {
 	if (GetAsyncKeyState('W'))
 	{
-		XMMATRIX translation = XMMatrixTranslation(0.0f, 0.0f, 0.05f);
+		XMMATRIX translation = XMMatrixTranslation(0.0f, 0.0f, 0.005f);
 		XMMATRIX tmp = XMLoadFloat4x4(&xCamera);
 		XMMATRIX res = XMMatrixMultiply(translation, tmp);
 		XMStoreFloat4x4(&xCamera, res);
 	}
 	else if (GetAsyncKeyState('S'))
 	{
-		XMMATRIX translation = XMMatrixTranslation(0.0f, 0.0f, -0.05f);
+		XMMATRIX translation = XMMatrixTranslation(0.0f, 0.0f, -0.005f);
 		XMMATRIX tmp = XMLoadFloat4x4(&xCamera);
 		XMMATRIX res = XMMatrixMultiply(translation, tmp);
 		XMStoreFloat4x4(&xCamera, res);
 	}
 	else if (GetAsyncKeyState('A'))
 	{
-		XMMATRIX translation = XMMatrixTranslation(-0.05f, 0.0f, 0.0f);
+		XMMATRIX translation = XMMatrixTranslation(-0.005f, 0.0f, 0.0f);
 		XMMATRIX tmp = XMLoadFloat4x4(&xCamera);
 		XMMATRIX res = XMMatrixMultiply(translation, tmp);
 		XMStoreFloat4x4(&xCamera, res);
 	}
 	else if (GetAsyncKeyState('D'))
 	{
-		XMMATRIX translation = XMMatrixTranslation(0.05f, 0.0f, 0.0f);
+		XMMATRIX translation = XMMatrixTranslation(0.005f, 0.0f, 0.0f);
 		XMMATRIX tmp = XMLoadFloat4x4(&xCamera);
 		XMMATRIX res = XMMatrixMultiply(translation, tmp);
 		XMStoreFloat4x4(&xCamera, res);
@@ -118,14 +120,14 @@ void teddy::updateCam(float dt)
 
 	if (GetAsyncKeyState(VK_UP))
 	{
-		XMMATRIX translation = XMMatrixTranslation(0.0f, 0.05f, 0.0f);
+		XMMATRIX translation = XMMatrixTranslation(0.0f, 0.005f, 0.0f);
 		XMMATRIX tmp = XMLoadFloat4x4(&xCamera);
 		XMMATRIX res = XMMatrixMultiply(translation, tmp);
 		XMStoreFloat4x4(&xCamera, res);
 	}
 	else if (GetAsyncKeyState(VK_DOWN))
 	{
-		XMMATRIX translation = XMMatrixTranslation(0.0f, -0.05f, 0.0f);
+		XMMATRIX translation = XMMatrixTranslation(0.0f, -0.005f, 0.0f);
 		XMMATRIX tmp = XMLoadFloat4x4(&xCamera);
 		XMMATRIX res = XMMatrixMultiply(translation, tmp);
 		XMStoreFloat4x4(&xCamera, res);
@@ -164,7 +166,7 @@ void teddy::updateCam(float dt)
 
 void teddy::createResources(void)
 {
-	/*D3D11_RASTERIZER_DESC rastDesc;
+	D3D11_RASTERIZER_DESC rastDesc;
 	ZeroMemory(&rastDesc, sizeof(D3D11_RASTERIZER_DESC));
 	rastDesc.FillMode = D3D11_FILL_WIREFRAME;
 	rastDesc.CullMode = D3D11_CULL_NONE;
@@ -174,11 +176,13 @@ void teddy::createResources(void)
 
 	D3D11_RASTERIZER_DESC rastDesc2;
 	ZeroMemory(&rastDesc2, sizeof(D3D11_RASTERIZER_DESC));
-	rastDesc.FillMode = D3D11_FILL_SOLID;
-	rastDesc.CullMode = D3D11_CULL_NONE;
-	rastDesc.DepthClipEnable = true;
+	rastDesc2.FillMode = D3D11_FILL_SOLID;
+	rastDesc2.CullMode = D3D11_CULL_NONE;
+	rastDesc2.DepthClipEnable = true;
 
-	device->CreateRasterizerState(&rastDesc2, &xFill);*/
+	HRESULT Return;
+
+	Return = device->CreateRasterizerState(&rastDesc2, &xFill);
 
 	device->CreatePixelShader(pixelShader, sizeof(pixelShader), NULL, &teddyMesh.pixelShader);
 	device->CreateVertexShader(vertexShader, sizeof(vertexShader), NULL, &teddyMesh.vertexShader);
