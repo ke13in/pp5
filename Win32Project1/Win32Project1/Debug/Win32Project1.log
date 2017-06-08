@@ -1,6 +1,6 @@
 ﻿  teddy.cpp
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\win32project1\teddy.cpp(29): warning C4244: 'initializing': conversion from 'UINT' to 'float', possible loss of data
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\win32project1\teddy.cpp(138): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\win32project1\teddy.cpp(139): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\win32project1\teddy.cpp(31): warning C4244: 'initializing': conversion from 'UINT' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\win32project1\teddy.cpp(179): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\win32project1\teddy.cpp(180): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
   Win32Project1.vcxproj -> E:\Users\Kebin\Desktop\PP5\Project\pp5\Win32Project1\Debug\Win32Project1.exe
   Win32Project1.vcxproj -> E:\Users\Kebin\Desktop\PP5\Project\pp5\Win32Project1\Debug\Win32Project1.pdb (Full PDB)

@@ -1,0 +1,11 @@
+﻿  teddy.cpp
+teddy.cpp(29): warning C4244: 'initializing': conversion from 'UINT' to 'float', possible loss of data
+teddy.cpp(177): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+teddy.cpp(178): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+  Generating code
+  1 of 392 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Win32Project1.vcxproj -> E:\Users\Kebin\Desktop\PP5\Project\pp5\Win32Project1\Release\Win32Project1.exe
+  Win32Project1.vcxproj -> E:\Users\Kebin\Desktop\PP5\Project\pp5\Win32Project1\Release\Win32Project1.pdb (Full PDB)

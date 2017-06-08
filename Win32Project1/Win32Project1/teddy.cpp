@@ -20,10 +20,10 @@ bool teddy::init()
 
 	fLoader.loadScene();
 	fLoader.loadMesh();
+	fLoader.loadJoints();
+	joints = fLoader.getJoints();
 	mesh = fLoader.getMesh();
 
-	
-	
 
 
 	float aspect = clientW / clientH;
@@ -32,10 +32,14 @@ bool teddy::init()
 	if (aspect < 1.0f)
 		fov *= 2.0f;
 
-	XMMATRIX perspec = XMMatrixPerspectiveFovLH(fov, aspect, 0.01f, 1000.0f);
+	XMMATRIX perspec = XMMatrixPerspectiveFovLH(fov, aspect, 0.01f, 10000.0f);
 
 	XMStoreFloat4x4(&teddyMesh.constBuffData.projection, XMMatrixTranspose(perspec));
 	XMStoreFloat4x4(&teddyMesh.constBuffData.model, XMMatrixIdentity());
+	XMStoreFloat4x4(&teddyJoints.constBuffData.projection, XMMatrixTranspose(perspec));
+	XMStoreFloat4x4(&teddyJoints.constBuffData.model, XMMatrixIdentity());
+	XMStoreFloat4x4(&plane.constBuffData.projection, XMMatrixTranspose(perspec));
+	XMStoreFloat4x4(&plane.constBuffData.model, XMMatrixIdentity());
 
 	static const XMVECTORF32 eye = { 0.0f, 5.7f, -5.5f, 0.0f };
 	static const XMVECTORF32 at = { 0.0f, -0.1f, 0.0f, 0.0f };
@@ -43,6 +47,9 @@ bool teddy::init()
 
 	DirectX::XMStoreFloat4x4(&xCamera, XMMatrixInverse(nullptr, XMMatrixLookAtLH(eye, at, up)));
 	DirectX::XMStoreFloat4x4(&teddyMesh.constBuffData.view, XMMatrixTranspose(XMMatrixInverse(nullptr, XMLoadFloat4x4(&xCamera))));
+	DirectX::XMStoreFloat4x4(&teddyJoints.constBuffData.view, XMMatrixTranspose(XMMatrixInverse(nullptr, XMLoadFloat4x4(&xCamera))));
+	DirectX::XMStoreFloat4x4(&plane.constBuffData.view, XMMatrixTranspose(XMMatrixInverse(nullptr, XMLoadFloat4x4(&xCamera))));
+
 
 	createResources();
 
@@ -54,15 +61,45 @@ void teddy::update(float u)
 {
 	updateCam(u);
 	DirectX::XMStoreFloat4x4(&teddyMesh.constBuffData.view, XMMatrixTranspose(XMMatrixInverse(nullptr, XMLoadFloat4x4(&xCamera))));
+	DirectX::XMStoreFloat4x4(&teddyJoints.constBuffData.view, XMMatrixTranspose(XMMatrixInverse(nullptr, XMLoadFloat4x4(&xCamera))));
+	DirectX::XMStoreFloat4x4(&plane.constBuffData.view, XMMatrixTranspose(XMMatrixInverse(nullptr, XMLoadFloat4x4(&xCamera))));
+
 }
 
 void teddy::render(float r)
 {
 	deviceContext->ClearRenderTargetView(renderTarget, DirectX::Colors::SeaGreen);
 
-	deviceContext->UpdateSubresource(teddyMesh.constantBuffer, 0, NULL, &teddyMesh.constBuffData, 0, 0);
+
+
+	deviceContext->UpdateSubresource(plane.constantBuffer, 0, NULL, &plane.constBuffData, 0, 0);
 	UINT Stride = sizeof(ShaderStruct::VertPosColor);
 	UINT Offset = 0;
+	deviceContext->IASetVertexBuffers(0, 1, &plane.vertexBuffer, &Stride, &Offset);
+	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	deviceContext->IASetInputLayout(plane.inputLayout);
+	deviceContext->VSSetShader(plane.vertexShader, nullptr, 0);
+	deviceContext->VSSetConstantBuffers(0, 1, &plane.constantBuffer);
+	deviceContext->PSSetShader(plane.pixelShader, nullptr, 0);
+	deviceContext->Draw(plane.vertCount, 0);
+
+
+#if _DEBUG
+	deviceContext->UpdateSubresource(teddyJoints.constantBuffer, 0, NULL, &teddyJoints.constBuffData, 0, 0);
+	Stride = sizeof(ShaderStruct::VertPosColor);
+	Offset = 0;
+	deviceContext->IASetVertexBuffers(0, 1, &teddyJoints.vertexBuffer, &Stride, &Offset);
+	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
+	deviceContext->IASetInputLayout(teddyJoints.inputLayout);
+	deviceContext->VSSetShader(teddyJoints.vertexShader, nullptr, 0);
+	deviceContext->VSSetConstantBuffers(0, 1, &teddyJoints.constantBuffer);
+	deviceContext->PSSetShader(teddyJoints.pixelShader, nullptr, 0);
+	deviceContext->Draw(teddyJoints.vertCount, 0);
+#endif // _DEBUG
+
+	deviceContext->UpdateSubresource(teddyMesh.constantBuffer, 0, NULL, &teddyMesh.constBuffData, 0, 0);
+	Stride = sizeof(ShaderStruct::VertPosColor);
+	Offset = 0;
 	deviceContext->IASetVertexBuffers(0, 1, &teddyMesh.vertexBuffer, &Stride, &Offset);
 	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	deviceContext->IASetInputLayout(teddyMesh.inputLayout);
@@ -72,6 +109,8 @@ void teddy::render(float r)
 	deviceContext->RSSetState(xWire);
 	deviceContext->Draw(teddyMesh.vertCount, 0);
 	deviceContext->RSSetState(xFill);
+
+
 
 
 
@@ -187,6 +226,12 @@ void teddy::createResources(void)
 	device->CreatePixelShader(pixelShader, sizeof(pixelShader), NULL, &teddyMesh.pixelShader);
 	device->CreateVertexShader(vertexShader, sizeof(vertexShader), NULL, &teddyMesh.vertexShader);
 
+	device->CreatePixelShader(pixelShader, sizeof(pixelShader), NULL, &teddyJoints.pixelShader);
+	device->CreateVertexShader(vertexShader, sizeof(vertexShader), NULL, &teddyJoints.vertexShader);
+
+	device->CreatePixelShader(pixelShader, sizeof(pixelShader), NULL, &plane.pixelShader);
+	device->CreateVertexShader(vertexShader, sizeof(vertexShader), NULL, &plane.vertexShader);
+
 	D3D11_INPUT_ELEMENT_DESC layout[] =
 
 	{
@@ -196,10 +241,34 @@ void teddy::createResources(void)
 	};
 
 	device->CreateInputLayout(layout, 2, vertexShader, sizeof(vertexShader), &teddyMesh.inputLayout);
+	device->CreateInputLayout(layout, 2, vertexShader, sizeof(vertexShader), &teddyJoints.inputLayout);
+	device->CreateInputLayout(layout, 2, vertexShader, sizeof(vertexShader), &plane.inputLayout);
+
 
 	CD3D11_BUFFER_DESC constBuffDesc(sizeof(ShaderStruct::MVPConstBuffer), D3D11_BIND_CONSTANT_BUFFER);
 	device->CreateBuffer(&constBuffDesc, nullptr, &teddyMesh.constantBuffer);
+	device->CreateBuffer(&constBuffDesc, nullptr, &teddyJoints.constantBuffer);
+	device->CreateBuffer(&constBuffDesc, nullptr, &plane.constantBuffer);
 
+	ShaderStruct::VertPosColor planeVerts[] = {
+		{XMFLOAT3{-40,-2,40}, XMFLOAT3{0,1,0}},
+		{XMFLOAT3{-40,-2,-40}, XMFLOAT3{0,1,0}},
+		{XMFLOAT3{40,-2,-40}, XMFLOAT3{0,1,0}},
+		{XMFLOAT3{ 40,-2,-40 }, XMFLOAT3{ 0,1,0 }},
+		{XMFLOAT3{ 40,-2,40 }, XMFLOAT3{ 0,1,0 }},
+		{XMFLOAT3{ -40,-2,40 }, XMFLOAT3{ 0,1,0 }},
+		
+	};
+
+	plane.vertCount = ARRAYSIZE(planeVerts);
+
+	D3D11_SUBRESOURCE_DATA planeBuffData = { 0 };
+	planeBuffData.pSysMem = planeVerts;
+	planeBuffData.SysMemPitch = 0;
+	planeBuffData.SysMemSlicePitch = 0;
+
+	CD3D11_BUFFER_DESC planeBuffDesc(sizeof(ShaderStruct::VertPosColor) * ARRAYSIZE(planeVerts), D3D11_BIND_VERTEX_BUFFER);
+	device->CreateBuffer(&planeBuffDesc, &planeBuffData, &plane.vertexBuffer);
 
 
 	std::vector<ShaderStruct::VertPosColor> meshVerts;
@@ -212,7 +281,7 @@ void teddy::createResources(void)
 		tmp.pos.y = mesh[i].xyzw[1];
 		tmp.pos.z = mesh[i].xyzw[2];
 
-		tmp.color = XMFLOAT3{ 0, 1, 0 };
+		tmp.color = XMFLOAT3{ 0, 0, 1 };
 
 		meshVerts.push_back(tmp);
 		
@@ -229,7 +298,30 @@ void teddy::createResources(void)
 	CD3D11_BUFFER_DESC vertBuffDesc(sizeof(ShaderStruct::VertPosColor) * meshVerts.size(), D3D11_BIND_VERTEX_BUFFER);
 	device->CreateBuffer(&vertBuffDesc, &vertBuffData, &teddyMesh.vertexBuffer);
 
+#if _DEBUG
+	for each(Joint j in joints)
+	{
+		if (j.parentInd != -1)
+		{
+			ShaderStruct::VertPosColor tmp;
+			tmp.pos = XMFLOAT3(j.transform[12], j.transform[13], j.transform[14]);
+			tmp.color = XMFLOAT3(1.0f, 1.0f, 1.0f);
+			jointVertBuff.push_back(tmp);
+			tmp.pos = XMFLOAT3(joints[j.parentInd].transform[12], joints[j.parentInd].transform[13], joints[j.parentInd].transform[14]);
+			jointVertBuff.push_back(tmp);
+		}
+	}
 
+	teddyJoints.vertCount = jointVertBuff.size();
+
+	D3D11_SUBRESOURCE_DATA jointsBuffData = { 0 };
+	jointsBuffData.pSysMem = jointVertBuff.data();
+	jointsBuffData.SysMemPitch = 0;
+	jointsBuffData.SysMemSlicePitch = 0;
+
+	CD3D11_BUFFER_DESC jointsBuffDesc(sizeof(ShaderStruct::VertPosColor) * jointVertBuff.size(), D3D11_BIND_VERTEX_BUFFER);
+	device->CreateBuffer(&jointsBuffDesc, &jointsBuffData, &teddyJoints.vertexBuffer);
+#endif // _DEBUG
 
 
 

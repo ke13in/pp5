@@ -12,6 +12,9 @@
 
 #include "fbxsdk.h"
 #include <vector>
+#include <queue>
+
+
 //
 //// This class is exported from the DLL.dll
 //class DLL_API CDLL
@@ -36,14 +39,29 @@ struct pos
 	float xyzw[4];
 };
 
+struct FBXJoint
+{
+	FbxNode* node;
+	int parentInd;
+};
+
+struct Joint
+{
+	float transform[16];
+	int parentInd;
+};
+
 
 
 class fbx
 {
 private:
 	FbxScene * fScene;
-	const char* fileName = "Battle Mage with Rig and textures.fbx";
+	FbxPose * fPose;
+	const char* fileName = "Teddy_Idle.fbx";
 	std::vector<pos> fMesh;
+	std::vector<FBXJoint> fJoints;
+	std::vector<Joint> returnJoints;
 
 public:
 
@@ -169,5 +187,81 @@ public:
 		return fMesh;
 	}
 
+	DLL_API void loadJoints()
+	{
+		
+
+		for (unsigned int i = 0; i <  fScene->GetPoseCount(); i++)
+		{
+			if (fScene->GetPose(i)->IsBindPose())
+			{
+				fPose = fScene->GetPose(i);
+			}
+		}
+
+		FbxNode* root;
+
+		for (unsigned int i = 0; i < fPose->GetCount(); i++)
+		{
+			FbxSkeleton* tmp = fPose->GetNode(i)->GetSkeleton();
+
+			if (tmp != nullptr)
+			{
+				if (tmp->IsSkeletonRoot())
+				{
+					root = fPose->GetNode(i);
+					break;
+				}
+			}
+		}
+
+		std::queue<FBXJoint> nodes;
+		FBXJoint tmp;
+		tmp.node = root;
+		tmp.parentInd = -1;
+		nodes.push(tmp);
+
+		while (!nodes.empty())
+		{
+			FBXJoint nTmp = nodes.front();
+			nodes.pop();
+			fJoints.push_back(nTmp);
+
+			for (unsigned int i = 0; i < nTmp.node->GetChildCount(); i++)
+			{
+				FBXJoint jTmp;
+				jTmp.node = nTmp.node->GetChild(i);
+				jTmp.parentInd = fJoints.size() - 1;
+				nodes.push(jTmp);
+			}
+		}
+
+			for (unsigned int i = 0; i < fJoints.size(); i++)
+			{
+				Joint tmp;
+
+				FbxMatrix trans = fJoints[i].node->EvaluateGlobalTransform();
+				tmp.parentInd = fJoints[i].parentInd;
+				for (unsigned int j = 0; j < 4; j++)
+				{
+					for (unsigned int k = 0; k < 4; k++)
+					{
+						tmp.transform[4 * k + j] = trans.Get(k, j);
+					}
+				}
+
+				returnJoints.push_back(tmp);
+			}
+		}
+
+	DLL_API std::vector<Joint> getJoints()
+	{
+		return returnJoints;
+	}
+
 
 };
+
+	
+
+

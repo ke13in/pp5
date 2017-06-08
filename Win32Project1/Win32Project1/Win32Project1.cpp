@@ -1,5 +1,4 @@
 // Win32Project1.cpp : Defines the entry point for the application.
-//
 
 #include "stdafx.h"
 #include "Win32Project1.h"

@@ -74,8 +74,12 @@ private:
 	ID3D11SamplerState* xSampler;
 	ID3D11ShaderResourceView* view;
 	ShaderStruct::VertexBuffObj teddyMesh;
+	ShaderStruct::VertexBuffObj teddyJoints;
+	ShaderStruct::VertexBuffObj plane;
 	fbx fLoader;
 	std::vector<pos> mesh;
+	std::vector<Joint> joints;
+	std::vector<ShaderStruct::VertPosColor> jointVertBuff;
 
 
 public:

@@ -1,0 +1,8 @@
+﻿     Creating library E:\Users\Kebin\Desktop\PP5\Project\pp5\Win32Project1\Release\DLL.lib and object E:\Users\Kebin\Desktop\PP5\Project\pp5\Win32Project1\Release\DLL.exp
+  Generating code
+  0 of 441 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    3 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  DLL.vcxproj -> E:\Users\Kebin\Desktop\PP5\Project\pp5\Win32Project1\Release\DLL.dll
+  DLL.vcxproj -> E:\Users\Kebin\Desktop\PP5\Project\pp5\Win32Project1\Release\DLL.pdb (Full PDB)
