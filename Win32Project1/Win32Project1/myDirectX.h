@@ -27,6 +27,8 @@ protected:
 	bool rMClick;
 	POINT currMPos;
 	POINT prevMPos;
+	float totalTime;
+	float currTime;
 
 	HWND hAppwnd;
 	HINSTANCE hAppInst;

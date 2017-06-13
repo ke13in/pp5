@@ -79,6 +79,7 @@ private:
 	fbx fLoader;
 	std::vector<pos> mesh;
 	std::vector<Joint> joints;
+	Clip fAnimation;
 	std::vector<ShaderStruct::VertPosColor> jointVertBuff;
 
 

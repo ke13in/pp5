@@ -51,6 +51,17 @@ struct Joint
 	int parentInd;
 };
 
+struct KFrame
+{
+	std::vector<Joint> j;
+	double elapsed = 0;
+};
+
+struct Clip
+{
+	std::vector<KFrame> frames;
+	double length = 0;
+};
 
 
 class fbx
@@ -62,6 +73,7 @@ private:
 	std::vector<pos> fMesh;
 	std::vector<FBXJoint> fJoints;
 	std::vector<Joint> returnJoints;
+	Clip animation;
 
 public:
 
@@ -259,7 +271,49 @@ public:
 		return returnJoints;
 	}
 
+	DLL_API void loadAnim()
+	{
+		FbxAnimStack* anim = fScene->GetCurrentAnimationStack();
 
+		FbxTimeSpan localTime = anim->GetLocalTimeSpan();
+
+		FbxTime dur = localTime.GetDuration();
+
+		animation.length = dur.GetSecondDouble();
+
+		FbxLongLong frameCount = dur.GetFrameCount(FbxTime::EMode::eFrames24);
+
+		for (FbxLongLong i = 0; i < frameCount; i++)
+		{
+			KFrame kf;
+			FbxTime t;
+
+			t.SetFrame(i, FbxTime::EMode::eFrames24);
+			kf.elapsed = t.GetSecondDouble();
+
+			for (unsigned int j = 0; j < fJoints.size(); j++)
+			{
+				Joint tmpJoint;
+				FbxAMatrix jTrans = fJoints[j].node->EvaluateGlobalTransform(t);
+				tmpJoint.parentInd = fJoints[j].parentInd;
+				for (unsigned int k = 0; k < 4; k++)
+				{
+					for (unsigned int l = 0; l < 4; l++)
+					{
+						tmpJoint.transform[4 * l + k] = jTrans.Get(l, k);
+					}
+				}
+				kf.j.push_back(tmpJoint);
+			}
+			animation.frames.push_back(kf);
+		}
+	}
+
+	DLL_API Clip getAnimation()
+	{
+		return animation;
+	}
+	
 };
 
 	

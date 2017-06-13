@@ -45,8 +45,17 @@ myDirectX::~myDirectX()
 int myDirectX::run()
 {
 	MSG m = { 0 };
+
+	std::chrono::time_point<std::chrono::system_clock> prev;
+	prev = std::chrono::system_clock::now();
+
 	while (WM_QUIT != m.message)
 	{
+
+
+		totalTime += (std::chrono::system_clock::now() - prev).count() / 10000000.0f;
+		prev = std::chrono::system_clock::now();
+
 		if (PeekMessage(&m, NULL, NULL, NULL, PM_REMOVE))
 		{
 			TranslateMessage(&m);
