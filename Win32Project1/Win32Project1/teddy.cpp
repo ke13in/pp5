@@ -22,9 +22,11 @@ bool teddy::init()
 	fLoader.loadMesh();
 	fLoader.loadJoints();
 	fLoader.loadAnim();
+	fLoader.loadLight();
 	joints = fLoader.getJoints();
 	mesh = fLoader.getMesh();
 	fAnimation = fLoader.getAnimation();
+	
 
 	float aspect = clientW / clientH;
 	float fov = 70.0f * XM_PI / 180.0f;
@@ -198,7 +200,9 @@ void teddy::render(float r)
 	deviceContext->VSSetShader(teddyMesh.vertexShader, nullptr, 0);
 	deviceContext->VSSetConstantBuffers(0, 1, &teddyMesh.constantBuffer);
 	deviceContext->PSSetShader(teddyMesh.pixelShader, nullptr, 0);
-	deviceContext->RSSetState(xWire);
+	//deviceContext->RSSetState(xWire);
+	deviceContext->PSSetSamplers(0, 1, &teddyMesh.State);
+	deviceContext->PSSetShaderResources(0, 1, &teddyMesh.View);
 	deviceContext->Draw(teddyMesh.vertCount, 0);
 	deviceContext->RSSetState(xFill);
 
@@ -343,12 +347,12 @@ void teddy::createResources(void)
 	device->CreateBuffer(&constBuffDesc, nullptr, &plane.constantBuffer);
 
 	ShaderStruct::VertPosColor planeVerts[] = {
-		{XMFLOAT3{-40,-2,40}, XMFLOAT3{0,1,0}},
-		{XMFLOAT3{-40,-2,-40}, XMFLOAT3{0,1,0}},
-		{XMFLOAT3{40,-2,-40}, XMFLOAT3{0,1,0}},
-		{XMFLOAT3{ 40,-2,-40 }, XMFLOAT3{ 0,1,0 }},
-		{XMFLOAT3{ 40,-2,40 }, XMFLOAT3{ 0,1,0 }},
-		{XMFLOAT3{ -40,-2,40 }, XMFLOAT3{ 0,1,0 }},
+		{XMFLOAT3{-40,-2,40}, XMFLOAT3{1,1,1}},
+		{XMFLOAT3{-40,-2,-40}, XMFLOAT3{1,1,1}},
+		{XMFLOAT3{40,-2,-40}, XMFLOAT3{1,1,1}},
+		{XMFLOAT3{ 40,-2,-40 }, XMFLOAT3{ 1,1,1 }},
+		{XMFLOAT3{ 40,-2,40 }, XMFLOAT3{ 1,1,1 }},
+		{XMFLOAT3{ -40,-2,40 }, XMFLOAT3{ 1,1,1 }},
 		
 	};
 
@@ -362,6 +366,7 @@ void teddy::createResources(void)
 	CD3D11_BUFFER_DESC planeBuffDesc(sizeof(ShaderStruct::VertPosColor) * ARRAYSIZE(planeVerts), D3D11_BIND_VERTEX_BUFFER);
 	device->CreateBuffer(&planeBuffDesc, &planeBuffData, &plane.vertexBuffer);
 
+	HRESULT Same = CreateDDSTextureFromFile(device, L"Teddy_D.dds", (ID3D11Resource**)&teddyMesh.State, &teddyMesh.View);
 
 	std::vector<ShaderStruct::VertPosColor> meshVerts;
 
@@ -373,7 +378,9 @@ void teddy::createResources(void)
 		tmp.pos.y = mesh[i].xyzw[1];
 		tmp.pos.z = mesh[i].xyzw[2];
 
-		tmp.color = XMFLOAT3{ 0, 0, 1 };
+		tmp.color.x = mesh[i].uv[0];
+		tmp.color.y = 1 - mesh[i].uv[1];
+		tmp.color.z = 1.0f;
 
 		meshVerts.push_back(tmp);
 		

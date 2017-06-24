@@ -37,6 +37,9 @@
 struct pos
 {
 	float xyzw[4];
+	float uv[4];
+	float normals[4];
+
 };
 
 struct FBXJoint
@@ -62,6 +65,58 @@ struct Clip
 	std::vector<KFrame> frames;
 	double length = 0;
 };
+//
+//struct PropertyChannel
+//{
+//
+//	FbxAnimCurve* mAnimCurve;
+//	float mValue;
+//
+//	PropertyChannel() : mAnimCurve(NULL), mValue(0.0f) {}
+//
+//	float get(const FbxTime& time) const
+//	{
+//		if (mAnimCurve)
+//		{
+//			return mAnimCurve->Evaluate(time);
+//		}
+//		else
+//		{
+//			return mValue;
+//		}
+//	}
+//
+//};
+//
+//class LightCache
+//{
+//public:
+//	LightCache();
+//	~LightCache();
+//
+//	static void initEnviron(const FbxColor& m_ambientLight);
+//
+//	bool init(const FbxLight* m_light, FbxAnimLayer* m_animLayer);
+//
+//	void setLight(const FbxTime& m_time) const;
+//
+//private:
+//
+//	static int lightCount;
+//
+//	uint32_t mLightIndex;
+//	FbxLight::EType mType;
+//	PropertyChannel mColorRed;
+//	PropertyChannel mColorGreen;
+//	PropertyChannel mColorBlue;
+//	PropertyChannel mColorAngle;
+//
+//	
+//
+//
+//};
+
+
 
 
 class fbx
@@ -142,6 +197,8 @@ public:
 	{
 		FbxMesh * mesh = node->GetMesh();
 
+		FbxGeometryElementNormal* norm = mesh->GetElementNormal();
+
 		std::vector<int> vertIndx;
 
 		for (unsigned int i = 0; i < mesh->GetPolygonCount(); i++)
@@ -167,6 +224,38 @@ public:
 
 		}
 
+		FbxStringList stringList;
+
+		mesh->GetUVSetNames(stringList);
+
+		for (unsigned int i = 0; i < mesh->GetPolygonCount(); i++)
+		{
+			for (unsigned int j = 0; j < 3; j++)
+			{
+				FbxVector2 uv;
+				FbxVector4 norms;
+
+				bool unMapped;
+
+				int tmp = mesh->GetPolygonVertex(i, j);
+
+				if (mesh->GetPolygonVertexUV(i, j, stringList.GetStringAt(0), uv, unMapped))
+				{
+					fMesh[mesh->GetPolygonVertex(i, j)].uv[0] = uv[0];
+					fMesh[mesh->GetPolygonVertex(i, j)].uv[1] = uv[1];
+					fMesh[mesh->GetPolygonVertex(i, j)].uv[2] = 1;
+					fMesh[mesh->GetPolygonVertex(i, j)].uv[3] = 0;
+
+				}
+				if (mesh->GetPolygonVertexNormal(i, j, norms))
+				{
+					fMesh[mesh->GetPolygonVertex(i, j)].normals[0] = norms[0];
+					fMesh[mesh->GetPolygonVertex(i, j)].normals[1] = norms[0];
+					fMesh[mesh->GetPolygonVertex(i, j)].normals[2] = norms[0];
+					fMesh[mesh->GetPolygonVertex(i, j)].normals[3] = norms[0];
+				}
+			}
+		}
 
 	}
 
@@ -313,6 +402,45 @@ public:
 	{
 		return animation;
 	}
+
+	DLL_API void loadLight()
+	{
+		FbxNode* lightNode = FbxNode::Create(fScene, "lightNode");
+
+		FbxLight* light = FbxLight::Create(fScene, "light");
+
+		lightNode->SetNodeAttribute(light);
+
+		light->LightType.Set(FbxLight::ePoint);
+
+		light->Color.Set(FbxDouble3(1.0, 0.0, 0.0));
+
+		light->Intensity.Set(100.0);
+
+		FbxNode* rootNode = fScene->GetRootNode();
+
+		rootNode->AddChild(lightNode);
+
+	}
+
+	//DLL_API void initLights()
+	//{
+	//	LightCache::initEnviron(fScene->GetGlobalSettings().GetAmbientColor());
+
+	//	const int lightCount = fScene->GetSrcObjectCount<FbxLight>();
+
+	//	for (int i = 0; i < lightCount i++)
+	//	{
+	//		FbxLight* light = fScene->GetSrcObject<FbxLight>(i);
+	//		FbxNode* node = light->GetNode();
+	//		if (node)
+	//		{
+	//			FbxAMatrix globalPos = GetGlocalPosition
+	//		}
+	//	}
+
+
+	//}
 	
 };
 

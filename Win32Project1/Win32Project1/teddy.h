@@ -9,6 +9,7 @@
 #include "pixelShader.csh"
 #include "vertexShader.csh"
 #include "..\DLL\DLL.h"
+#include "DDSTextureLoader.h"
 
 using namespace std;
 using namespace DirectX;
@@ -45,6 +46,8 @@ namespace ShaderStruct
 		ID3D11VertexShader* vertexShader;
 		ID3D11PixelShader* pixelShader;
 		ID3D11Buffer* constantBuffer;
+		ID3D11ShaderResourceView* View;
+		ID3D11SamplerState* State;
 		ShaderStruct::MVPConstBuffer constBuffData;
 		unsigned int vertCount;
 

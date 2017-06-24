@@ -169,6 +169,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DDSTextureLoader.h" />
     <ClInclude Include="DirectX.h" />
     <ClInclude Include="myDirectX.h" />
     <ClInclude Include="Resource.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Win32Project1.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DDSTextureLoader.cpp" />
     <ClCompile Include="DirectX.cpp" />
     <ClCompile Include="myDirectX.cpp" />
     <ClCompile Include="stdafx.cpp">

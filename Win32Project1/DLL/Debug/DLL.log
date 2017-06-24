@@ -1,30 +1,45 @@
 ﻿  stdafx.cpp
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(147): warning C4018: '<': signed/unsigned mismatch
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(161): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(162): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(163): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(164): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(179): warning C4018: '<': signed/unsigned mismatch
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(183): warning C4018: '<': signed/unsigned mismatch
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(206): warning C4018: '<': signed/unsigned mismatch
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(216): warning C4018: '<': signed/unsigned mismatch
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(242): warning C4018: '<': signed/unsigned mismatch
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(261): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(303): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(204): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(218): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(219): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(220): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(221): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(231): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(244): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(245): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(252): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(253): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(254): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(255): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(268): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(272): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(295): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(305): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(331): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(350): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(392): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   DLL.cpp
+cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
   dllmain.cpp
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(147): warning C4018: '<': signed/unsigned mismatch
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(161): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(162): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(163): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(164): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(179): warning C4018: '<': signed/unsigned mismatch
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(183): warning C4018: '<': signed/unsigned mismatch
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(206): warning C4018: '<': signed/unsigned mismatch
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(216): warning C4018: '<': signed/unsigned mismatch
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(242): warning C4018: '<': signed/unsigned mismatch
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(261): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(303): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(204): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(218): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(219): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(220): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(221): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(231): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(244): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(245): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(252): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(253): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(254): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(255): warning C4244: '=': conversion from 'fbxsdk::FbxDouble' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(268): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(272): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(295): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(305): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(331): warning C4018: '<': signed/unsigned mismatch
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(350): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\users\kebin\desktop\pp5\project\pp5\win32project1\dll\dll.h(392): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
      Creating library E:\Users\Kebin\Desktop\PP5\Project\pp5\Win32Project1\Debug\DLL.lib and object E:\Users\Kebin\Desktop\PP5\Project\pp5\Win32Project1\Debug\DLL.exp
   DLL.vcxproj -> E:\Users\Kebin\Desktop\PP5\Project\pp5\Win32Project1\Debug\DLL.dll
   DLL.vcxproj -> E:\Users\Kebin\Desktop\PP5\Project\pp5\Win32Project1\Debug\DLL.pdb (Full PDB)
